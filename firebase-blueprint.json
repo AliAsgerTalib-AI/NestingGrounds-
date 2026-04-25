@@ -1,0 +1,146 @@
+{
+  "entities": {
+    "Profile": {
+      "title": "Profile",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "auth_user_id": { "type": "string" },
+        "full_name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone_number": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "admin"] },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["auth_user_id", "email", "created_at", "updated_at"]
+    },
+    "Home": {
+      "title": "Home",
+      "description": "Information about a home",
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string" },
+        "home_name": { "type": "string" },
+        "owner_name": { "type": "string" },
+        "address_line_1": { "type": "string" },
+        "address_line_2": { "type": "string" },
+        "city": { "type": "string" },
+        "state": { "type": "string" },
+        "zip_code": { "type": "string" },
+        "country": { "type": "string" },
+        "home_type": { "type": "string" },
+        "notes": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["user_id", "home_name", "created_at", "updated_at"]
+    },
+    "Room": {
+      "title": "Room",
+      "description": "Information about a room in a home",
+      "type": "object",
+      "properties": {
+        "home_id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "room_name": { "type": "string" },
+        "room_description": { "type": "string" },
+        "room_photo_url": { "type": "string" },
+        "notes": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["home_id", "user_id", "room_name", "created_at", "updated_at"]
+    },
+    "InventoryItem": {
+      "title": "Inventory Item",
+      "description": "Information about an inventory item",
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string" },
+        "home_id": { "type": "string" },
+        "room_id": { "type": "string" },
+        "item_name": { "type": "string" },
+        "category": { "type": "string" },
+        "description": { "type": "string" },
+        "brand": { "type": "string" },
+        "model_number": { "type": "string" },
+        "serial_number": { "type": "string" },
+        "quantity": { "type": "number" },
+        "purchase_date": { "type": "string", "format": "date" },
+        "purchase_price": { "type": "number" },
+        "store_vendor": { "type": "string" },
+        "current_estimated_value": { "type": "number" },
+        "replacement_value": { "type": "number" },
+        "condition": { "type": "string" },
+        "insurance_notes": { "type": "string" },
+        "warranty_provider": { "type": "string" },
+        "warranty_start_date": { "type": "string", "format": "date" },
+        "warranty_end_date": { "type": "string", "format": "date" },
+        "warranty_status": { "type": "string" },
+        "notes": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["user_id", "home_id", "room_id", "item_name", "created_at", "updated_at"]
+    },
+    "ItemPhoto": {
+      "title": "Item Photo",
+      "description": "Photos of an inventory item",
+      "type": "object",
+      "properties": {
+        "item_id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "file_url": { "type": "string" },
+        "file_path": { "type": "string" },
+        "photo_type": { "type": "string" },
+        "caption": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["item_id", "user_id", "file_url", "created_at"]
+    },
+    "ItemDocument": {
+      "title": "Item Document",
+      "description": "Documents related to an inventory item",
+      "type": "object",
+      "properties": {
+        "item_id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "document_type": { "type": "string" },
+        "file_url": { "type": "string" },
+        "file_path": { "type": "string" },
+        "file_name": { "type": "string" },
+        "mime_type": { "type": "string" },
+        "notes": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["item_id", "user_id", "file_url", "created_at"]
+    }
+  },
+  "firestore": {
+    "/profiles/{userId}": {
+      "schema": "Profile",
+      "description": "User profiles"
+    },
+    "/homes/{homeId}": {
+      "schema": "Home",
+      "description": "Homes owned by users"
+    },
+    "/homes/{homeId}/rooms/{roomId}": {
+      "schema": "Room",
+      "description": "Rooms within a home"
+    },
+    "/inventory_items/{itemId}": {
+      "schema": "InventoryItem",
+      "description": "Inventory items"
+    },
+    "/inventory_items/{itemId}/photos/{photoId}": {
+      "schema": "ItemPhoto",
+      "description": "Photos for an item"
+    },
+    "/inventory_items/{itemId}/documents/{docId}": {
+      "schema": "ItemDocument",
+      "description": "Documents for an item"
+    }
+  }
+}

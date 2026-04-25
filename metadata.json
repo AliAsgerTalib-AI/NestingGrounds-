@@ -1,0 +1,12 @@
+{
+  "name": "HomeVantage Inventory",
+  "description": "A comprehensive SaaS home inventory management system for tracking possessions, warranties, and insurance records.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "inventory_tracking",
+    "warranty_management",
+    "document_storage"
+  ]
+}
